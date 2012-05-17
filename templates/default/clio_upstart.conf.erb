@@ -1,0 +1,18 @@
+description "clio data archival web service"
+author      "Dominic LoBue <dominic@geodelic.com>"
+
+
+start on started mongodb
+stop on stopping mongodb
+
+respawn
+
+chdir <%=node.clio.dist_dir%>
+
+env CONFIGFILE=<%=node.clio.conf_dir%>/gunicorn.conf
+
+script
+    . deps/bin/activate
+    exec gunicorn -c $CONFIGFILE clio.store:app
+end script
+
