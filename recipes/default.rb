@@ -1,6 +1,7 @@
 
 package "python-virtualenv"
 package "python-pip"
+package "python-dev"
 package "libevent-dev"
 
 
