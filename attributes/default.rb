@@ -1,8 +1,9 @@
 
+default.clio.root_dir = Promise.new { attribute?("root_dir") ? root_dir : "/opt" }
 
 default.clio.dist_tag = '0.2.5'
-default.clio.dist_dir = File.join(root_dir, 'clio')
-default.clio.deps_dir = File.join(clio.dist_dir, 'deps')
+default.clio.dist_dir = Promise.new { File.join(clio.root_dir, 'clio') }
+default.clio.deps_dir = Promise.new { File.join(clio.dist_dir, 'deps') }
 default.clio.conf_dir = '/etc/clio'
 
 default.clio.git_repo = 'git://github.com/dlobue/clio.git'
