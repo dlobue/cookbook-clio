@@ -42,48 +42,32 @@ directory node.clio.conf_dir
 template node.clio.conf.upstart do
     source "clio_upstart.conf.erb"
     mode "0644"
-    owner 'root'
-    group 'root'
-    variables(
-    )
     notifies :stop, 'service[clio]', :immediately
 end
 
 template node.clio.conf.gunicorn do
     source "gunicorn.conf.erb"
     mode "0644"
-    owner 'root'
-    group 'root'
-    variables(
-    )
     notifies :stop, 'service[clio]', :immediately
 end
 
 template node.clio.conf.logger do
     source "logger.conf.erb"
     mode "0644"
-    owner 'root'
-    group 'root'
-    variables(
-    )
     notifies :stop, 'service[clio]', :immediately
 end
 
 template '/etc/logrotate.d/clio' do
     source 'logrotated.erb'
     mode "0644"
-    owner 'root'
-    group 'root'
-    variables(
-    )
 end
 
 
 
 service "clio" do
     provider Chef::Provider::Service::Upstart
-    supports :status => true, :restart => true, :reload => true
+    supports [:status, :restart, :reload]
     action :start
-    subscribes :reload, "git[#{node.clio.dist_dir}]"
+    subscribes :reload, resources(:git => node.clio.dist_dir)
 end
 
