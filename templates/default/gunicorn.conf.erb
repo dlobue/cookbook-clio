@@ -6,4 +6,7 @@ group = 'clio'
 workers = 2
 worker_class = 'gevent'
 worker_connections = 2048
+<% if node.clio.max_requests %>
+max_requests = <%=node.clio.max_requests%>
+<% end %>
 
