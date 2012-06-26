@@ -9,6 +9,7 @@ default.clio.conf_dir = '/etc/clio'
 default.clio.git_repo = 'git://github.com/dlobue/clio.git'
 
 default.clio.port = 64000
+default.clio.max_requests = 100
 
 default.clio.conf.gunicorn = File.join(clio.conf_dir, 'gunicorn.conf')
 default.clio.conf.logger = File.join(clio.conf_dir, 'logger.conf')
